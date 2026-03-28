@@ -9,9 +9,10 @@ interface GlassCardProps {
   className?: string;
   hover?: boolean;
   animate?: boolean;
+  tilt?: boolean;
 }
 
-export function GlassCard({ children, className, hover = false, animate = true }: GlassCardProps) {
+export function GlassCard({ children, className, hover = false, animate = true, tilt = false }: GlassCardProps) {
   const Component = animate ? motion.div : "div";
   const animationProps = animate
     ? {
@@ -25,9 +26,11 @@ export function GlassCard({ children, className, hover = false, animate = true }
     <Component
       className={cn(
         "glass rounded-2xl p-6",
-        hover && "transition-transform hover:scale-[1.02] cursor-pointer",
+        hover && "transition-transform cursor-pointer",
+        tilt && "glass-tilt",
         className
       )}
+      data-tilt={tilt ? "true" : "false"}
       {...animationProps}
     >
       {children}
@@ -43,6 +46,7 @@ interface GlassButtonProps {
   className?: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
+  magnetic?: boolean;
 }
 
 export function GlassButton({
@@ -53,6 +57,7 @@ export function GlassButton({
   className,
   disabled = false,
   type = "button",
+  magnetic = true,
 }: GlassButtonProps) {
   const variants = {
     primary: "bg-blue-500 hover:bg-blue-600 text-white",
@@ -76,8 +81,9 @@ export function GlassButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "rounded-xl font-medium transition-all shadow-lg",
+        "rounded-xl font-medium transition-all shadow-lg btn-press",
         "disabled:opacity-50 disabled:cursor-not-allowed",
+        magnetic && "magnetic-button",
         variants[variant],
         sizes[size],
         className

@@ -181,7 +181,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <GlassCard hover className="h-full">
+                <GlassCard hover tilt className="h-full">
                   <div className="text-5xl mb-4">{feature.icon}</div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                     {feature.title}

@@ -10,15 +10,21 @@ interface StatCardProps {
   trend?: number;
   className?: string;
   delay?: number;
+  pulse?: boolean;
 }
 
-export function StatCard({ title, value, icon, trend, className, delay = 0 }: StatCardProps) {
+export function StatCard({ title, value, icon, trend, className, delay = 0, pulse = false }: StatCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
-      className={cn("glass rounded-2xl p-6", className)}
+      className={cn(
+        "glass rounded-2xl p-6 glass-tilt",
+        pulse && "pulse-glow",
+        className
+      )}
+      data-tilt="true"
     >
       <div className="flex items-start justify-between">
         <div>
@@ -27,7 +33,8 @@ export function StatCard({ title, value, icon, trend, className, delay = 0 }: St
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: delay + 0.2 }}
-            className="text-3xl font-bold text-gray-900 dark:text-white"
+            className="text-3xl font-bold text-gray-900 dark:text-white counter"
+            data-value={typeof value === 'number' ? value : 0}
           >
             {value}
           </motion.h3>

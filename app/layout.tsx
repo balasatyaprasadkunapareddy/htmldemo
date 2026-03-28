@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/layouts/Navigation";
+import { LiquidGlassEffects } from "@/components/ui/LiquidGlassEffects";
 
 export const metadata: Metadata = {
   title: "CivicPro - Transform Your Community",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>
+        <LiquidGlassEffects />
       </body>
     </html>
   );
